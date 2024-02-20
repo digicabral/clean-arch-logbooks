@@ -6,6 +6,9 @@ import {
 
 export class CreatedLogbookDto implements ICreateLogbookResult {
   public readonly logbookId: string;
+  public constructor(id: string) {
+    this.logbookId = id;
+  }
 }
 
 export class CreateLogBookController {
@@ -15,11 +18,13 @@ export class CreateLogBookController {
   public async handle(req: Request, res: Response): Promise<void> {
     const userId = "fakeUserId";
 
-    const response = await this._useCase.execute({
+    const result = await this._useCase.execute({
       name: req.body.name,
       userId,
     });
 
-    res.status(201).json({ id: response.logbookId });
+    const response: CreatedLogbookDto = new CreatedLogbookDto(result.logbookId);
+
+    res.status(201).json(response);
   }
 }

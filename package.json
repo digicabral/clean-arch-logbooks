@@ -14,6 +14,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@prisma/client": "^5.10.1",
     "express": "^4.18.2",
     "jest-mock-extended": "^2.0.7",
     "yarn": "^1.22.21"
