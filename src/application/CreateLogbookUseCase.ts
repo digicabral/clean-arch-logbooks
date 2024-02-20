@@ -1,4 +1,5 @@
 import { Logbook } from "../domain/Logbook";
+import { IUseCase } from "../shared/IUseCase";
 import { ILogbookRepository } from "./ILogbookRepository";
 
 interface ICreateLogbookDto {
@@ -10,7 +11,9 @@ export interface ICreateLogbookResult {
   logbookId: string;
 }
 
-export class CreateLogBookUseCase {
+export class CreateLogBookUseCase
+  implements IUseCase<ICreateLogbookDto, ICreateLogbookResult>
+{
   public constructor(private readonly _logbookRepo: ILogbookRepository) {}
 
   public async execute(
