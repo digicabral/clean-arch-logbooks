@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
-import { CreateLogBookUseCase } from "./application/CreateLogbookUseCase";
-import { GetLogbookUseCase } from "./application/GetLogbookUseCase";
-import { InMemoryLogbookRepository } from "./infrastructure/InMemoryLogbookRepository";
-import { PrismaLogbookRepository } from "./infrastructure/PrismaLogbookRepository";
-import { CreateLogBookController } from "./presentation/CreateLogbookController";
-import { GetLogbookController } from "./presentation/GetLogbookController";
-import { Server } from "./presentation/Server";
+import { CreateLogBookController } from "./logbook/features/create-logbook/CreateLogbookController";
+import { CreateLogBookUseCase } from "./logbook/features/create-logbook/CreateLogbookUseCase";
+import { GetLogbookController } from "./logbook/features/get-logbook/GetLogbookController";
+import { GetLogbookUseCase } from "./logbook/features/get-logbook/GetLogbookUseCase";
+import { InMemoryLogbookRepository } from "./logbook/shared/InMemoryLogbookRepository";
+import { PrismaLogbookRepository } from "./logbook/shared/PrismaLogbookRepository";
+import { Server } from "./logbook/shared/Server";
 
 export async function main(): Promise<void> {
   const client = new PrismaClient();

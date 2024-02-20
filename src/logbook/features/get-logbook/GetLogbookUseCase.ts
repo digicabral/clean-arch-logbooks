@@ -1,6 +1,6 @@
 import { Logbook } from "@prisma/client";
-import { IUseCase } from "../shared/IUseCase";
-import { ILogbookRepository } from "./ILogbookRepository";
+import { IUseCase } from "../../../shared/IUseCase";
+import { ILogbookRepository } from "../../shared/ILogbookRepository";
 
 interface IGetLogbookDto {
   id: string;

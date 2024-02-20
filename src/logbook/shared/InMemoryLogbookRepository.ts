@@ -1,5 +1,5 @@
-import { ILogbookRepository } from "../application/ILogbookRepository";
 import { Logbook } from "../domain/Logbook";
+import { ILogbookRepository } from "./ILogbookRepository";
 
 export class InMemoryLogbookRepository implements ILogbookRepository {
   private readonly _logbooks: Logbook[] = [];

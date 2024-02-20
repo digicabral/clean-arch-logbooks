@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import {
   CreateLogBookUseCase,
   ICreateLogbookResult,
-} from "../application/CreateLogbookUseCase";
+} from "./CreateLogbookUseCase";
 
 export class CreatedLogbookDto implements ICreateLogbookResult {
   public readonly logbookId: string;

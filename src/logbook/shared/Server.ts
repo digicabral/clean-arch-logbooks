@@ -1,6 +1,6 @@
 import express from "express";
-import { CreateLogBookController } from "./CreateLogbookController";
-import { GetLogbookController } from "./GetLogbookController";
+import { CreateLogBookController } from "../features/create-logbook/CreateLogbookController";
+import { GetLogbookController } from "../features/get-logbook/GetLogbookController";
 
 export class Server {
   public static async run(
