@@ -1,4 +1,4 @@
-import { Logbook } from "../domain/Logbook";
+import { Logbook } from "../../domain/Logbook";
 
 export interface ILogbookRepository {
   find(id: string): Promise<Logbook | null>;

@@ -1,6 +1,6 @@
 import { IUseCase } from "../../../shared/IUseCase";
 import { Logbook } from "../../domain/Logbook";
-import { ILogbookRepository } from "../../shared/ILogbookRepository";
+import { ILogbookRepository } from "../../shared/repositories/ILogbookRepository";
 
 interface ICreateLogbookDto {
   name: string;

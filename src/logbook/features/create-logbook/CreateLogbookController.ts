@@ -1,4 +1,3 @@
-import { Request, Response } from "express";
 import {
   CreateLogBookUseCase,
   ICreateLogbookResult,
@@ -15,16 +14,16 @@ export class CreateLogBookController {
   //injects the logbook use case
   public constructor(private readonly _useCase: CreateLogBookUseCase) {}
 
-  public async handle(req: Request, res: Response): Promise<void> {
+  public async handle(name: string): Promise<{ status: number; data: any }> {
     const userId = "fakeUserId";
 
     const result = await this._useCase.execute({
-      name: req.body.name,
+      name,
       userId,
     });
 
     const response: CreatedLogbookDto = new CreatedLogbookDto(result.logbookId);
 
-    res.status(201).json(response);
+    return { status: 201, data: response };
   }
 }

@@ -1,22 +1,27 @@
-import express from "express";
 import { CreateLogBookController } from "../features/create-logbook/CreateLogbookController";
 import { GetLogbookController } from "../features/get-logbook/GetLogbookController";
+import { IHttpServer } from "./http-adapters/IHttpServer";
 
 export class Server {
-  public static async run(
+  private server: IHttpServer;
+
+  constructor(server: IHttpServer) {
+    this.server = server;
+  }
+
+  public async run(
     port: number,
     controller: CreateLogBookController,
     getController: GetLogbookController
   ): Promise<void> {
-    const app = express();
-
-    app.use(express.json());
-
-    app.post("/logbooks", (req, res) => controller.handle(req, res));
-    app.get("/logbooks", (req, res) => getController.handle(req, res));
-
-    app.listen(port, () => {
-      console.log("Server is running on port: " + port);
+    this.server.route({
+      method: "post",
+      path: "/logbooks",
+      handler: async (req: any, res: any) => {
+        const { status, data } = await controller.handle(req.body.name);
+        res.status(status).send(data);
+      },
     });
+    this.server.listen(port);
   }
 }
