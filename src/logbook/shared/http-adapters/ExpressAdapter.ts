@@ -1,21 +1,21 @@
-import express, { IRoute } from "express";
+import express, { Application, IRoute, Request, Response } from "express";
 import { IHttpServer } from "./IHttpServer";
 
 class ExpressAdapter implements IHttpServer {
-  private server: express.Application;
+  private server: Application;
 
   constructor() {
     this.server = express();
     this.server.use(express.json());
   }
 
-  listen(port: number): void {
+  public listen(port: number): void {
     this.server.listen(port, () => {
       console.log("Server is running on port: " + port);
     });
   }
 
-  route({
+  public route({
     method,
     path,
     handler,
@@ -26,14 +26,17 @@ class ExpressAdapter implements IHttpServer {
   }): void {
     const cb = this.server
       .route(path)
-      [method]((req: express.Request, res: express.Response) => {
+      [method]((req: Request, res: Response) => {
         const customReq = {
           query: req.query,
           body: req.body,
           params: req.params,
         };
 
-        const customRes = {};
+        const customRes = {
+          status: res.status,
+          send: res.send.bind(res),
+        };
 
         handler(customReq, customRes);
       });

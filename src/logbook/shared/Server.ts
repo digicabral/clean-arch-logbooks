@@ -11,14 +11,23 @@ export class Server {
 
   public async run(
     port: number,
-    controller: CreateLogBookController,
+    createController: CreateLogBookController,
     getController: GetLogbookController
   ): Promise<void> {
     this.server.route({
       method: "post",
       path: "/logbooks",
       handler: async (req: any, res: any) => {
-        const { status, data } = await controller.handle(req.body.name);
+        const { status, data } = await createController.handle(req.body.name);
+        res.status(status).send(data);
+      },
+    });
+
+    this.server.route({
+      method: "get",
+      path: "/logbooks/:id",
+      handler: async (req: any, res: any) => {
+        const { status, data } = await getController.handle(req?.params.id);
         res.status(status).send(data);
       },
     });
