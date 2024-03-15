@@ -1,0 +1,35 @@
+{
+    "env": {
+        "node": true
+    },
+    "root": true,
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "import"],
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "rules": {
+        "no-duplicate-imports": "warn",
+        "@typescript-eslint/no-explicit-any": "off",
+        "curly": ["error", "multi"],
+        "sort-vars": "warn",
+        "default-param-last": "warn",
+        "eqeqeq": "warn",
+        "no-else-return": "warn",
+        "no-return-await": "warn",
+        "no-undef-init": "error",
+        "no-unneeded-ternary": "error",
+        "no-var": "error",
+        "one-var": ["error", "never"],
+        "prefer-const": "error",
+        "no-multiple-empty-lines": "error",
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"],
+        "no-trailing-spaces": "error",
+        "no-unused-vars": "off",
+        "no-param-reassign": "error",
+        "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }]
+    }
+}

@@ -1,17 +1,23 @@
 {
   "compilerOptions": {
-    "target": "es6",
     "module": "commonjs",
-    "strict": true,
-    "moduleResolution": "node",
-    "outDir": "./dist",
     "esModuleInterop": true,
+    "target": "es2022",
+    "noImplicitAny": false,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": ".",
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "strictPropertyInitialization": false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "strictNullChecks": true,
-    "allowJs": false,
+    "skipLibCheck": false,
+    "skipDefaultLibCheck": false,
+    "types": ["node", "jest"]
   },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
 }

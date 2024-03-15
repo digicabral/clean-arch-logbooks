@@ -1,29 +1,30 @@
-import { Logbook } from "@prisma/client";
-import { IUseCase } from "../../../shared/IUseCase";
-import { ILogbookRepository } from "../../shared/repositories/ILogbookRepository";
+import { IUseCase } from '../../../shared/IUseCase';
+import { Logbook } from '../../domain/Logbook';
+import { ILogbookRepository } from '../../shared/repositories/ILogbookRepository';
 
 interface IGetLogbookDto {
-  id: string;
+    id: string;
 }
 
 export class LogbookDto {
-  //exposes only the name and id props
-  public constructor(public readonly id: string, public name: string) {}
-  public static from(logbook: Logbook): LogbookDto {
-    return new LogbookDto(logbook.id, logbook.name);
-  }
+    //exposes only the name and id props
+    public constructor(
+        public readonly id: string,
+        public name: string
+    ) {}
+    public static from(logbook: Logbook): LogbookDto {
+        return new LogbookDto(logbook.id, logbook.name);
+    }
 }
 
 export class GetLogbookUseCase implements IUseCase<IGetLogbookDto, LogbookDto> {
-  public constructor(private readonly _logbookRepository: ILogbookRepository) {}
+    public constructor(private readonly _logbookRepository: ILogbookRepository) {}
 
-  public async execute(input: IGetLogbookDto): Promise<LogbookDto> {
-    const logbook = await this._logbookRepository.find(input.id);
+    public async execute(input: IGetLogbookDto): Promise<LogbookDto> {
+        const logbook = await this._logbookRepository.find(input.id);
 
-    if (!logbook) {
-      throw new Error("not found");
+        if (!logbook) throw new Error('not found');
+
+        return LogbookDto.from(logbook);
     }
-
-    return LogbookDto.from(logbook);
-  }
 }

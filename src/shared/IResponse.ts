@@ -1,6 +1,6 @@
 interface IResponse {
-  data: any;
-  status: number;
+    data: any;
+    status: number;
 }
 
 export default IResponse;
