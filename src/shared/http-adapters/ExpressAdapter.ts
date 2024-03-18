@@ -1,4 +1,9 @@
-import express, { Application, IRoute, Request, Response } from 'express';
+import express, {
+    Application,
+    Request as ExpressRequest,
+    Response as ExpressResponse,
+    IRoute,
+} from 'express';
 import { IHttpServer } from './IHttpServer';
 
 class ExpressAdapter implements IHttpServer {
@@ -24,8 +29,8 @@ class ExpressAdapter implements IHttpServer {
         path: string;
         handler: any;
     }): void {
-        this.server.route(path)[method]((req: Request, res: Response) => {
-            const customReq = {
+        this.server.route(path)[method](async (req: ExpressRequest, res: ExpressResponse) => {
+            const ctx = {
                 query: req.query,
                 body: req.body,
                 params: req.params,
@@ -33,12 +38,10 @@ class ExpressAdapter implements IHttpServer {
 
             res.setHeader('Http-client', 'express');
             res.removeHeader('x-powered-by');
-            const customRes = {
-                status: res.status,
-                send: res.send.bind(res),
-            };
 
-            handler(customReq, customRes);
+            const newRes = await handler(ctx);
+
+            res.status(newRes.status).send(newRes.body);
         });
     }
 }

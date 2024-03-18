@@ -17,18 +17,23 @@ export class Server {
         this.server.route({
             method: 'post',
             path: '/logbooks',
-            handler: async (req: any, res: any) => {
-                const { status, data } = await createController.handle(req.body.name);
-                res.status(status).send(data);
+            handler: async (ctx) => {
+                const { status, data } = await createController.handle(ctx.body.name);
+
+                return {
+                    status,
+                    body: data,
+                };
             },
         });
 
         this.server.route({
             method: 'get',
             path: '/logbooks/:id',
-            handler: async (req: any, res: any) => {
-                const { status, data } = await getController.handle(req?.params.id);
-                res.status(status).send({ data });
+            handler: async (ctx) => {
+                const { status, data } = await getController.handle(ctx?.params.id);
+
+                return { status, body: data };
             },
         });
 

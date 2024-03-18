@@ -1,4 +1,15 @@
-type HttpHandler = (req: any, res: any) => void;
+type Context = {
+    body: Record<string, string>;
+    params: Record<string, string>;
+    headers: Record<string, string>;
+};
+
+type Response = {
+    status: number;
+    body: any;
+};
+
+type HttpHandler = (req: Context) => Promise<Response>;
 
 type RouteParams = {
     method: string;
@@ -11,4 +22,4 @@ interface IHttpServer {
     route({ method, path, handler }: RouteParams): void;
 }
 
-export { HttpHandler, IHttpServer, RouteParams };
+export { Context, HttpHandler, IHttpServer, Response, RouteParams };

@@ -7,6 +7,7 @@ import { Server } from './logbook/shared/Server';
 import { PrismaLogbookRepository } from './logbook/shared/repositories/PrismaLogbookRepository';
 import ExpressAdapter from './shared/http-adapters/ExpressAdapter';
 import FastifyAdapter from './shared/http-adapters/FastifyAdapter';
+import { IHttpServer } from './shared/http-adapters/IHttpServer';
 
 export async function main(): Promise<void> {
     const client = new PrismaClient();
@@ -18,7 +19,7 @@ export async function main(): Promise<void> {
     const getController = new GetLogbookController(getUseCase);
 
     const HTTP_FRAMEWORK = process.env.HTTP_FRAMEWORK;
-    let httpServer: ExpressAdapter | FastifyAdapter;
+    let httpServer: IHttpServer;
 
     if (HTTP_FRAMEWORK === 'express') httpServer = new ExpressAdapter();
     else httpServer = new FastifyAdapter();
